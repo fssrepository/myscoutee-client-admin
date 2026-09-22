@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=MyScoutee Admin background monitor
+Comment=Start the local monitor; polling and notifications require Connect
+Exec=myscoutee-client-admin --no-open
+Icon=myscoutee-client-admin
+Terminal=false
+X-GNOME-Autostart-enabled=true
+NoDisplay=true

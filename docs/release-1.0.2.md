@@ -1,0 +1,1 @@
+Linux admin monitor: configurable server URL and 10-second polling, scoped API key, active-profile/registration statistics and admin attention indicators. One background process survives closing the browser window. Includes Debian/Ubuntu installer and private API PDF. No server deployment is performed by this release.

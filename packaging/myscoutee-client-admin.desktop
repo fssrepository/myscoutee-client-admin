@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=MyScoutee Admin
+Comment=Private admin statistics and notifications
+Exec=myscoutee-client-admin
+Icon=myscoutee-client-admin
+Terminal=false
+Categories=Network;Utility;
+StartupNotify=true
