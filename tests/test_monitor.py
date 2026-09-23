@@ -38,6 +38,24 @@ class MonitorTest(unittest.TestCase):
         self.assertIsNone(self.monitor.state()['data'])
         self.fetch.assert_called_once()
 
+    def test_key_preview_is_masked_and_clears_on_disconnect_or_revocation(self):
+        key = 'qa-prefix-12-rest-of-private-key'
+        self.monitor.connect({'url': 'http://localhost/api/admin-client/v1', 'key': key, 'interval': 10})
+        self.assertEqual(self.monitor.state()['keyPreview'], key[:12] + '…')
+        self.assertNotIn(key, json.dumps(self.monitor.state()))
+        self.assertNotIn(key[:12], self.path.read_text())
+        self.monitor.disconnect()
+        self.assertEqual(self.monitor.state()['keyPreview'], '')
+        self.monitor.connect({'url': 'http://localhost/api/admin-client/v1', 'key': key, 'interval': 10})
+        self.fetch.side_effect = urllib.error.HTTPError('http://localhost', 401, '', {}, None)
+        self.monitor.poll_once()
+        self.assertEqual(self.monitor.state()['keyPreview'], '')
+
+    def test_short_invalid_credentials_are_never_exposed_by_preview(self):
+        self.connect()
+        self.assertEqual(self.monitor.state()['keyPreview'], '••••')
+        self.assertNotIn('secret-key', json.dumps(self.monitor.state()))
+
     def test_ubuntu_notification_identity_and_disconnect(self):
         self.monitor.notify = self.monitor.desktop_notification
         with patch.object(app.shutil, 'which', return_value='/usr/bin/notify-send'), patch.object(app.subprocess, 'run') as send:

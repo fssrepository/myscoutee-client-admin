@@ -153,6 +153,7 @@ class Monitor:
     def state(self):
         with self.lock:
             return {'connected': bool(self.key), 'preferences': {k: v for k, v in self.prefs.items() if k != 'clientId'},
+                    'keyPreview': (self.key[:12] + '…' if len(self.key) > 12 else '••••') if self.key else '',
                     'data': self.data, 'error': self.error, 'lastSuccess': self.last_success, 'alertSequence': self.alert_sequence}
 
     def poll_once(self):
