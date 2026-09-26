@@ -1,4 +1,4 @@
-# Private admin client API · 1.0.2
+# Private admin client API · 1.3.0
 
 This interface is for the private MyScoutee admin monitor. It is separate from the affiliate/import API and exposes no administrative mutation or message body.
 
@@ -56,7 +56,7 @@ The local UI binds only to 127.0.0.1 on a random port. A per-instance control ca
 
 ## Build and release
 
-`tools/build_deb.sh` builds `dist/myscoutee-client-admin_1.0.2_all.deb`. Install with `sudo apt install ./myscoutee-client-admin_1.0.2_all.deb`. The private repository's `v1.0.2` workflow uploads the installer and this PDF to GitHub Releases. Repository access is required for downloads. Uninstall using the package manager; stop the monitor first. Per-user preferences remain until explicitly removed.
+`tools/build_deb.sh` builds `dist/myscoutee-client-admin_1.3.0_all.deb`. Install with `sudo apt install ./myscoutee-client-admin_1.3.0_all.deb`. The private repository's `v1.3.0` workflow uploads the installer and this PDF to GitHub Releases. Repository access is required for downloads. Uninstall using the package manager; stop the monitor first. Per-user preferences remain until explicitly removed.
 
 Automated application QA is tracked in the backend repository under `guides/qa/checklists/api/ADMIN-CLIENT-API-001.md`.
 

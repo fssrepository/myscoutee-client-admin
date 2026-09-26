@@ -27,3 +27,5 @@ The key stays in RAM, never in saved preferences. Remote URLs require HTTPS; loc
 ## Documentation
 
 [API reference, metric definitions and lifecycle](docs/admin-client-api.md). Stats show the server snapshot time; registrations are the last 7/30 UTC calendar days including today. Chrome/Chromium opens a compact app window when installed; other browsers open the same local UI normally. No embedded Chromium/GTK runtime is installed.
+
+Next release: **1.3.0**, Git tag `v1.3.0`. The download links above refer to the existing 1.0.2 release until 1.3.0 is published.
