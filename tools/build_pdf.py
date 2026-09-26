@@ -30,7 +30,7 @@ for line in (root/'docs/admin-client-api.md').read_text().splitlines():
 flush_table()
 def footer(canvas, document):
     canvas.setFont('Helvetica',8);canvas.setFillColor(colors.HexColor('#637087'))
-    canvas.drawString(44,25,'MyScoutee Admin Client 1.0.2 · Private API')
+    canvas.drawString(44,25,'MyScoutee Admin Client 1.3.0 · Private API')
     canvas.drawRightString(552,25,str(document.page))
 SimpleDocTemplate(str(root/'docs/admin-client-api.pdf'),rightMargin=44,leftMargin=44,topMargin=38,bottomMargin=42,
-                  title='MyScoutee Admin Client API 1.0.2',author='MyScoutee').build(flow,onFirstPage=footer,onLaterPages=footer)
+                  title='MyScoutee Admin Client API 1.3.0',author='MyScoutee').build(flow,onFirstPage=footer,onLaterPages=footer)

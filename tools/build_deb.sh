@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 project_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
-version=1.0.2
+version=1.3.0
 stage_dir="$(mktemp -d)"
 trap 'rm -rf -- "$stage_dir"' EXIT
 install -d "$stage_dir/DEBIAN" "$stage_dir/opt/myscoutee-client-admin" "$stage_dir/usr/bin" "$stage_dir/usr/share/applications" "$stage_dir/usr/share/icons/hicolor/scalable/apps" "$project_dir/dist"
