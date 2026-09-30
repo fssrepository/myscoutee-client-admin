@@ -1,0 +1,4 @@
+task_id,title,workstream,started,finished,tokens_million,api_equivalent_usd_estimate,active_hours,allocated_hours,models,reasoning,evidence
+MSC-94,Build and package the desktop administrator monitor,Tooling,2026-09-22,2026-09-23,17.48,22.59,0.4,0.4,gpt-6-astra,high,Estimated task allocation of measured daily account totals
+MSC-100,Qualify community group membership and profile switching,QA and release,2026-09-26,2026-09-26,381.65,522.72,13.3,13.2,gpt-6-astra,high,Estimated task allocation of measured daily account totals
+MSC-110,Reconstruct the Project and preserve restorable Git records,Project administration (AI-assisted),2026-09-30,2026-10-01,12.0,18.47,0.749,0.75,gpt-6-astra,high,Measured maintenance-session tokens; estimated allocation by backup snapshot ownership (9:2:2:2 across four Projects)
