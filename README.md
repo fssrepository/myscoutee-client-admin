@@ -2,13 +2,14 @@
 
 Small Linux monitor for private admin statistics and notifications. The browser window attaches to one local background process; closing/reopening it keeps the connection alive.
 
-| 1.0.2 | Download |
+| 1.3.0 | Download |
 | --- | --- |
-| Linux installer (Debian/Ubuntu) | [myscoutee-client-admin_1.0.2_all.deb](https://github.com/fssrepository/myscoutee-client-admin/releases/download/v1.0.2/myscoutee-client-admin_1.0.2_all.deb) |
-| Private API and operation guide | [PDF](docs/admin-client-api.pdf) · [Source](docs/admin-client-api.md) |
+| Linux installer (Debian/Ubuntu) | [myscoutee-client-admin_1.3.0_all.deb](https://github.com/fssrepository/myscoutee-client-admin/releases/download/v1.3.0/myscoutee-client-admin_1.3.0_all.deb) |
+| Private API and operation guide | [PDF](https://github.com/fssrepository/myscoutee-client-admin/releases/download/v1.3.0/admin-client-api.pdf) · [Source](docs/admin-client-api.md) |
+| MCP User Guide v1.0.0 | [PDF](https://raw.githubusercontent.com/fssrepository/myscoutee/master/guides/manuals/MyScoutee_MCP_User_Guide_v1.0.0_EN.pdf) — MCP / client 1.6.0, MSC-119 |
 
 ```sh
-sudo apt install ./myscoutee-client-admin_1.0.2_all.deb
+sudo apt install ./myscoutee-client-admin_1.3.0_all.deb
 myscoutee-client-admin
 ```
 
@@ -22,10 +23,13 @@ The key stays in RAM, never in saved preferences. Remote URLs require HTTPS; loc
 | Stop the background process | `myscoutee-client-admin --stop` |
 | Tests | `python3 -m unittest discover -s tests -v` |
 | Build installer | `tools/build_deb.sh` |
-| Release | Tag `v1.0.2`; the private GitHub Actions workflow builds and uploads the installer and PDF. |
+| Release | Tag `v1.3.0`; the private GitHub Actions workflow builds and uploads the installer and PDF. |
 
 ## Documentation
 
 [API reference, metric definitions and lifecycle](docs/admin-client-api.md). Stats show the server snapshot time; registrations are the last 7/30 UTC calendar days including today. Chrome/Chromium opens a compact app window when installed; other browsers open the same local UI normally. No embedded Chromium/GTK runtime is installed.
 
-Next release: **1.3.0**, Git tag `v1.3.0`. The download links above refer to the existing 1.0.2 release until 1.3.0 is published.
+Current published release: **1.3.0**, Git tag `v1.3.0`. The installer and private
+API PDF are available in that release. The MCP User Guide describes the separate
+MyScoutee AI connection, four access packs and current-role statistics in the
+MSC-119 implementation; it does not change this monitor's API contract.
