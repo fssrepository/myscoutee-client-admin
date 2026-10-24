@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 project_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
-version=1.3.0
+version="$(cat "$project_dir/VERSION")"
 stage_dir="$(mktemp -d)"
 trap 'rm -rf -- "$stage_dir"' EXIT
 install -d "$stage_dir/DEBIAN" "$stage_dir/opt/myscoutee-client-admin" "$stage_dir/usr/bin" "$stage_dir/usr/share/applications" "$stage_dir/usr/share/icons/hicolor/scalable/apps" "$project_dir/dist"
@@ -16,9 +16,10 @@ Maintainer: MyScoutee
 Description: Private MyScoutee administrator monitor
  Minimal browser UI with one local background polling process.
 EOF
-for file in admin_monitor.py index.html app.js style.css LICENSE; do
-  install -m 644 "$project_dir/$file" "$stage_dir/opt/myscoutee-client-admin/$file"
+for file in admin_monitor.py index.html app.js style.css; do
+  install -m 644 "$project_dir/src/$file" "$stage_dir/opt/myscoutee-client-admin/$file"
 done
+install -m 644 "$project_dir/LICENSE" "$stage_dir/opt/myscoutee-client-admin/LICENSE"
 cat > "$stage_dir/usr/bin/myscoutee-client-admin" <<'EOF'
 #!/bin/sh
 exec python3 /opt/myscoutee-client-admin/admin_monitor.py "$@"

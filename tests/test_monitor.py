@@ -8,7 +8,7 @@ import urllib.error
 import urllib.request
 from http.server import ThreadingHTTPServer
 from unittest.mock import Mock, patch
-import admin_monitor as app
+from src import admin_monitor as app
 
 
 def snapshot(unread=0, version='', reports=0):

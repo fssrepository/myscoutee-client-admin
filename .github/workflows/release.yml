@@ -1,22 +1,41 @@
 name: Private Linux release
+
 on:
   push:
-    tags: ['v1.3.0']
+    tags: ['v1.5.0']
+
 permissions:
   contents: write
+
+concurrency:
+  group: admin-release-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   package:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
       - name: Verify version
-        run: test "$GITHUB_REF_NAME" = v1.3.0
-      - name: Test
+        run: test "$GITHUB_REF_NAME" = "v$(cat VERSION)"
+      - name: Test existing runtime
         run: python3 -m unittest discover -s tests -v
-      - name: Package
-        run: tools/build_deb.sh
+      - name: Install manual build dependency
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y python3-reportlab
+      - name: Build manual and installer
+        run: |
+          /usr/bin/python3 guides/manuals/build_pdf.py
+          packaging/build_deb.sh
+          test "$(dpkg-deb -f dist/myscoutee-client-admin_1.5.0_all.deb Version)" = "$(cat VERSION)"
+          test "$(dpkg-deb -f dist/myscoutee-client-admin_1.5.0_all.deb Architecture)" = all
+          dpkg-deb --contents dist/myscoutee-client-admin_1.5.0_all.deb
       - name: Publish installer and private documentation
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create "$GITHUB_REF_NAME" dist/*.deb docs/admin-client-api.pdf --title "MyScoutee Admin 1.3.0" --notes-file docs/release-1.3.0.md --verify-tag
+          cp guides/manuals/admin-client-api.pdf dist/
+          (cd dist && sha256sum *.deb admin-client-api.pdf) > dist/SHA256SUMS
+          gh release create "$GITHUB_REF_NAME" dist/*.deb dist/admin-client-api.pdf dist/SHA256SUMS \
+            --title "MyScoutee Admin $(cat VERSION)" --notes-file guides/releases/v1.5.0.md --verify-tag
